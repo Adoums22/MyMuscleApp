@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id ("org.jetbrains.kotlin.plugin.serialization")
 }
 android {
     namespace = "com.example.mymuscleapp"
@@ -59,10 +60,9 @@ dependencies {
     implementation ("io.ktor:ktor-client-android:1.5.0")
     implementation ("io.ktor:ktor-client-serialization:1.5.0")
     implementation ("io.ktor:ktor-client-logging-jvm:1.5.0")
-    implementation("io.ktor:ktor-client-core:2.3.5")
-    implementation("io.ktor:ktor-client-okhttp:2.3.5")
-    implementation("io.ktor:ktor-client-core:2.3.5")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    implementation("io.ktor:ktor-client-cio:1.5.0")
+    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
+    implementation ("com.google.dagger:hilt-android:2.48.1")
+
 
 }
