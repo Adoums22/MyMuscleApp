@@ -19,9 +19,14 @@ import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
+/**
+ * HttpClient configuration for Android using Ktor.
+ */
 private const val NETWORK_TIME_OUT = 6_000L
 
 val httpClientAndroid = HttpClient(Android) {
+
+    // Install ContentNegotiation with JSON configuration
     install(ContentNegotiation) {
         json(
             Json {
@@ -34,12 +39,14 @@ val httpClientAndroid = HttpClient(Android) {
         )
     }
 
+    // Install HttpTimeout with network timeout settings
     install(HttpTimeout) {
         requestTimeoutMillis = NETWORK_TIME_OUT
         connectTimeoutMillis = NETWORK_TIME_OUT
         socketTimeoutMillis = NETWORK_TIME_OUT
     }
 
+    // Install Logging for HTTP requests and responses
     install(Logging) {
         logger = object : Logger {
             override fun log(message: String) {
@@ -49,18 +56,22 @@ val httpClientAndroid = HttpClient(Android) {
         level = LogLevel.ALL
     }
 
+    // Install ResponseObserver to log HTTP status
     install(ResponseObserver) {
         onResponse { response ->
             Log.d("HTTP status:", "${response.status.value}")
         }
     }
 
+    // Install DefaultRequest with content type header
     install(DefaultRequest) {
         header(HttpHeaders.ContentType, ContentType.Application.Json)
     }
 
+    // Set default request content type
     defaultRequest {
         contentType(ContentType.Application.Json)
         accept(ContentType.Application.Json)
     }
 }
+
