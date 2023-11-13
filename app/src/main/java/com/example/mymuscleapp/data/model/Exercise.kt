@@ -1,7 +1,7 @@
-package com.example.mymuscleapp.data
+package com.example.mymuscleapp.data.model
 
 
-import kotlinx.serialization.Contextual
+import com.example.mymuscleapp.data.model.AllExercise
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -14,5 +14,5 @@ data class Exercise(
     @SerialName("previous")
     val previous: String?,
     @SerialName("results")
-    val results: List<Result>
+    val allExercises: List<AllExercise>
 )

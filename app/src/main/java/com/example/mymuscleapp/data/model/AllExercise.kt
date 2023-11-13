@@ -1,12 +1,11 @@
-package com.example.mymuscleapp.data
+package com.example.mymuscleapp.data.model
 
 
-import androidx.annotation.AnyRes
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Result(
+data class AllExercise(
     @SerialName("author_history")
     val authorHistory: List<String>,
     @SerialName("category")
