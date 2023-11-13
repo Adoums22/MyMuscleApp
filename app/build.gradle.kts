@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id ("org.jetbrains.kotlin.plugin.serialization")
 }
 android {
     namespace = "com.example.mymuscleapp"
@@ -55,14 +56,20 @@ dependencies {
     implementation ("androidx.compose.animation:animation:1.5.4")
     implementation ("androidx.compose.ui:ui-tooling:1.5.4")
     implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
+    implementation ("androidx.lifecycle:lifecycle-runtime:2.3.1")
+    implementation ("androidx.compose.runtime:runtime-livedata:1.2.2")
+    implementation("androidx.compose.material3:material3:1.0.1")
+    implementation("androidx.compose.material3:material3-window-size-class:1.0.1")
     //Implementation Ktor
-    implementation ("io.ktor:ktor-client-android:1.5.0")
-    implementation ("io.ktor:ktor-client-serialization:1.5.0")
-    implementation ("io.ktor:ktor-client-logging-jvm:1.5.0")
-    implementation("io.ktor:ktor-client-core:2.3.5")
-    implementation("io.ktor:ktor-client-okhttp:2.3.5")
-    implementation("io.ktor:ktor-client-core:2.3.5")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
-
+    implementation("io.ktor:ktor-client-android:2.3.5")
+    implementation("io.ktor:ktor-client-serialization:2.3.5")
+    implementation("io.ktor:ktor-client-logging:2.3.5")
+    implementation("io.ktor:ktor-client-content-negotiation:2.3.5")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.5")
+    // Koin for Kotlin apps
+    implementation ("io.insert-koin:koin-ktor:3.5.0")
+    implementation ("io.insert-koin:koin-logger-slf4j:3.5.0")
+    implementation ("io.insert-koin:koin-android:3.5.0")
+    implementation("io.insert-koin:koin-androidx-compose:3.5.0")
 }
