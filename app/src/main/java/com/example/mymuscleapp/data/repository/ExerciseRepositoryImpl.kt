@@ -1,6 +1,8 @@
 package com.example.mymuscleapp.data.repository
 
+import com.example.mymuscleapp.data.model.Category
 import com.example.mymuscleapp.data.model.Exercise
+import com.example.mymuscleapp.data.model.Image
 import com.example.mymuscleapp.network.ApiService
 import io.ktor.client.call.body
 
@@ -22,6 +24,20 @@ class ExerciseRepositoryImpl(
     override suspend fun getExercises(): Result<Exercise> {
         return try {
             Result.success(apiService.getExercises().body())
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+    override suspend fun getCategory(): Result<Category> {
+        return try {
+            Result.success(apiService.getCategory().body())
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+    override suspend fun getImages(): Result<Image> {
+        return try {
+            Result.success(apiService.getImage().body())
         } catch (e: Exception) {
             Result.failure(e)
         }

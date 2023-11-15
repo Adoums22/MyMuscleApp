@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MyMuscleApp</string>
+    <string name="searchbar_hint">Search exercise</string>
 </resources>

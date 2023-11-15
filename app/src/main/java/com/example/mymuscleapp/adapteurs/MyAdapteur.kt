@@ -6,31 +6,45 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mymuscleapp.R
-import com.example.mymuscleapp.data.model.AllExercise
+import com.example.mymuscleapp.data.model.Result
 
-class ExerciseAdapter(private val exercises: List<AllExercise>) :
-    RecyclerView.Adapter<ExerciseAdapter.ExerciseViewHolder>() {
-
-    inner class ExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val nameTextView: TextView = itemView.findViewById(R.id.exerciseName)
-        val descriptionTextView: TextView = itemView.findViewById(R.id.exerciseDescription)
-        // Ajoutez d'autres vues au besoin
+internal class CustomAdapter(private var itemsListResult: List<Result>) :
+    RecyclerView.Adapter<CustomAdapter.MyViewHolder>() {
+    internal inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        var exerciseNameTextView: TextView = view.findViewById(R.id.exerciseNameTextView)
+        var equipmentTextView: TextView = view.findViewById(R.id.equipmentTextView)
+        var categoryTextView: TextView = view.findViewById(R.id.categoryTextView)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciseViewHolder {
-        val itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_exercise, parent, false)
-        return ExerciseViewHolder(itemView)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_exercise, parent, false)
+        return MyViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ExerciseViewHolder, position: Int) {
-        val exercise = exercises[position]
-        holder.nameTextView.text = exercise.name
-        holder.descriptionTextView.text = exercise.description
-        // Mettez à jour d'autres vues au besoin
+
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        val result = itemsListResult[position]
+        holder.exerciseNameTextView.text = "Name: ${result.name}"
+
+        // Affichage des équipements
+        val equipmentStringBuilder = StringBuilder()
+        for (equipment in result.equipment) {
+            equipmentStringBuilder.append("${equipment.name}, ")
+        }
+        val equipmentText = equipmentStringBuilder.toString().trimEnd(',', ' ')
+        holder.equipmentTextView.text = "Equipment: $equipmentText"
+
+        // Affichage de la catégorie
+        holder.categoryTextView.text = "${result.category.name}"
     }
+
 
     override fun getItemCount(): Int {
-        return exercises.size
+        return itemsListResult.size
+    }
+
+    fun updateData(newItems: List<Result>) {
+        itemsListResult = newItems
+        notifyDataSetChanged()
     }
 }

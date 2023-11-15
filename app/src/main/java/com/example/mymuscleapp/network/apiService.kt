@@ -12,9 +12,11 @@ class ApiService(private val client: HttpClient) {
 
     // Companion object to hold constant values
     companion object {
-        private const val BASE_URL = "https://wger.de/api/v2"
+        private const val BASE_URL = "https://wger.de/api/v2/"
         private const val LANGUAGE_PARAM = "language=2"
-        private const val EXERCISES_ENDPOINT = "exercise"
+        private const val EXERCISES_ENDPOINT = "exerciseinfo"
+        private const val CATEGORIES_ENDPOINT = "exercisecategory"
+        private const val IMAGES_ENDPOINT = "exerciseimage"
     }
 
     /**
@@ -23,4 +25,8 @@ class ApiService(private val client: HttpClient) {
      * @return A response from the API containing exercises.
      */
     suspend fun getExercises() = client.get("$BASE_URL$EXERCISES_ENDPOINT/?$LANGUAGE_PARAM")
+
+    suspend fun getCategory() = client.get("$BASE_URL$CATEGORIES_ENDPOINT/?$LANGUAGE_PARAM")
+
+    suspend fun getImage() = client.get("$BASE_URL$IMAGES_ENDPOINT/?$LANGUAGE_PARAM")
 }
