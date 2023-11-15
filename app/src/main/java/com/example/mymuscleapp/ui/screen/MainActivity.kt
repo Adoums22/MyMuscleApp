@@ -22,6 +22,8 @@ class MainActivity : ComponentActivity() {
         setContentView(R.layout.activity_main)
 
         // Initialize RecyclerView
+        // TODO : dynamic recyclerView for each categorie PLEASE !!! important
+
         val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
         val textView: TextView = findViewById(R.id.categoryTitle1)
         val textView2: TextView = findViewById(R.id.categoryTitle2)
@@ -32,29 +34,40 @@ class MainActivity : ComponentActivity() {
         val layoutManager2 = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         val layoutManager3 = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
-
+        // TODO : dynamic recyclerView for each categorie PLEASE !!! important
         recyclerView.layoutManager = layoutManager
         recyclerView2.layoutManager = layoutManager2
         recyclerView3.layoutManager = layoutManager3
         customAdapter = CustomAdapter(emptyList()) // Initialize with empty list
+
+        // TODO : dynamic recyclerView for each categorie PLEASE !!! important
         recyclerView.adapter = customAdapter
         recyclerView2.adapter = customAdapter
         recyclerView3.adapter = customAdapter
 
         lifecycleScope.launchWhenStarted {
-            mainViewModel.items.collect { exercises ->
-                // Update adapter data when new data arrives
-                customAdapter.updateData(exercises)
-                val titre = exercises.first().category.name
-                textView.text = titre
-                /**textView2.text = exercises[1].category.name
-                textView3.text = exercises[2].category.name*/
-                Log.i("Test", exercises.first().toString())
-                Log.i("Test1", titre)
+            try {
+                mainViewModel.getExercises().collect { result ->
+                    // Handle the result of fetching exercises
+                    result.onSuccess { exercises ->
+                        Log.i("Succees", exercises.toString())
+                        customAdapter.updateData(exercises.results ?: emptyList())
+
+                        // TODO : dynamic titles for each categorie PLEASE !!! important
+                        textView.text = exercises.results?.get(0)?.category?.name ?: ""
+                        textView2.text = exercises.results?.get(1)?.category?.name ?: ""
+                        textView3.text = exercises.results?.get(2)?.category?.name ?: ""
+                    }.onFailure { exception ->
+                        // Handle failure, log, or perform necessary actions
+                        Log.i("Fail", "Failure")
+                        Log.i("Fail message", exception.toString())
+                    }
+                }
+            } catch (e: Exception) {
+                // Handle exceptions if needed
+                Log.e("MainActivity", "Exception in collecting exercises", e)
             }
         }
-
-        mainViewModel.getExercises()
     }
 }
 

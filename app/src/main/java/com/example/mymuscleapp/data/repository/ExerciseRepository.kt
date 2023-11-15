@@ -1,7 +1,7 @@
 package com.example.mymuscleapp.data.repository
 
+import com.example.mymuscleapp.data.model.ApiResponse
 import com.example.mymuscleapp.data.model.Category
-import com.example.mymuscleapp.data.model.Exercise
 import com.example.mymuscleapp.data.model.Image
 
 /**
@@ -13,7 +13,7 @@ interface ExerciseRepository {
      * Fetches a list of exercises.
      * @return Result object containing either a list of exercises on success or an exception on failure.
      */
-    suspend fun getExercises(): Result<Exercise>
+    suspend fun getExercises(): Result<ApiResponse>
 
     suspend fun getCategory(): Result<Category>
 

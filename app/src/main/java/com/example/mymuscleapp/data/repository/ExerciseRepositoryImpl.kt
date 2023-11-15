@@ -1,7 +1,7 @@
 package com.example.mymuscleapp.data.repository
 
+import com.example.mymuscleapp.data.model.ApiResponse
 import com.example.mymuscleapp.data.model.Category
-import com.example.mymuscleapp.data.model.Exercise
 import com.example.mymuscleapp.data.model.Image
 import com.example.mymuscleapp.network.ApiService
 import io.ktor.client.call.body
@@ -21,7 +21,7 @@ class ExerciseRepositoryImpl(
      *
      * @return Result object containing either a list of exercises on success or an exception on failure.
      */
-    override suspend fun getExercises(): Result<Exercise> {
+    override suspend fun getExercises(): Result<ApiResponse> {
         return try {
             Result.success(apiService.getExercises().body())
         } catch (e: Exception) {
