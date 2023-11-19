@@ -14,10 +14,4 @@ interface ExerciseRepository {
      * @return Result object containing either a list of exercises on success or an exception on failure.
      */
     suspend fun getExercises(): Result<ApiResponse>
-
-    suspend fun getCategory(): Result<Category>
-
-    suspend fun getImages(): Result<Image>
-
-
 }

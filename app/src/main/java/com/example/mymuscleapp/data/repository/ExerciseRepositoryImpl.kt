@@ -28,20 +28,6 @@ class ExerciseRepositoryImpl(
             Result.failure(e)
         }
     }
-    override suspend fun getCategory(): Result<Category> {
-        return try {
-            Result.success(apiService.getCategory().body())
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
-    }
-    override suspend fun getImages(): Result<Image> {
-        return try {
-            Result.success(apiService.getImage().body())
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
-    }
 }
 
 
